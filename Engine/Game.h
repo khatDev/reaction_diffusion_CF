@@ -23,6 +23,7 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
+#include "Grid.h"
 
 class Game
 {
@@ -43,4 +44,6 @@ private:
 	/********************************/
 	/*  User Variables              */
 	/********************************/
+	int cellSize = 20;
+	Grid grid;
 };
