@@ -8,8 +8,8 @@ private:
 	class Cell
 	{
 	public:
-		int A = 0;
-		int B = 0;
+		float A = 0.0f;
+		float B = 0.0f;
 	};
 
 public:
