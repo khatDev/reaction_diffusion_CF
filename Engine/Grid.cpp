@@ -50,9 +50,9 @@ void Grid::Paint(const int _x, const int _y, const int radius, const bool mode)
 
 void Grid::Update(float dt)
 {
-	for (int y = 1; y < height - 1; y++)
+	for (int y = cellSize; y < cellSize * (height - 1); y += cellSize)
 	{
-		for (int x = 1; x < width - 1; x++)
+		for (int x = cellSize; x < cellSize * (width - 1); x += cellSize)
 		{
 			int i = ConvertXYToIndice(x, y);
 
@@ -61,7 +61,10 @@ void Grid::Update(float dt)
 			const float reaction = A * B * B;
 			oldCells[i].A = A + (diffA * GetLaplaceA(i) - reaction + f * (1 - A)) * dt;
 			oldCells[i].B = B + (diffB * GetLaplaceB(i) + reaction - (k + f) * B) * dt;
+
+			
 		}
+		
 	}
 
 	Cell* temp = cells;
@@ -76,7 +79,16 @@ void Grid::Draw(Graphics& gfx) const
 		int sX = (i % width) * cellSize;
 		int sY = (i / width) * cellSize;
 
-		Color c;
+		unsigned char val = (cells[i].A - cells[i].B) * 255;
+		val = val > 0 ? val : 0;
+		val = val < 255 ? val : 255;
+		
+		if (val < 0)
+		{
+
+		}
+
+		Color c = {val, val, val };
 		if (cells[i].A > cells[i].B)
 		{
 			c = Colors::White;
@@ -139,7 +151,9 @@ float Grid::GetLaplaceB(const int ind)
 	return sum;
 }
 
-int Grid::ConvertXYToIndice(const int x, const int y)
+int Grid::ConvertXYToIndice(const int _x, const int _y)
 {
+	int y = ((int)(_y / cellSize));
+	int x = ((int)(_x / cellSize));
 	return y * width + x;
 }

@@ -76,6 +76,10 @@ void Game::UpdateModel()
 
 	if (!pause)
 	{
+		//for (int i = 0; i < 3; i++)
+		//{
+		//	
+		//}
 		grid.Update();
 	}
 
