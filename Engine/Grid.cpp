@@ -1,4 +1,5 @@
 #include "Grid.h"
+#include "math.h"
 
 Grid::Grid(const int _w, const int _h, const int _cellSize)
 	:
@@ -10,7 +11,6 @@ Grid::Grid(const int _w, const int _h, const int _cellSize)
 	cells = new Cell[numCells];
 	oldCells = new Cell[numCells];
 	Reset();
-	Paint(1,1,1);
 }
 
 Grid::~Grid()
@@ -23,17 +23,27 @@ Grid::~Grid()
 	oldCells = nullptr;
 }
 
-void Grid::Paint(const int x, const int y, const int radius, const bool mode)
+void Grid::Paint(const int _x, const int _y, const int radius, const bool mode)
 {
-	int centerSize = 24; //Value is halved so 2 means its a 4x4
-	for (int y = height / 2 - centerSize; y < height / 2 + centerSize; y++)
+	for (int y = _y - radius - 1; y <= _y + radius - 1; y++)
 	{
-		for (int x = width / 2 - centerSize; x < width / 2 + centerSize; x++)
+		for (int x = _x - radius - 1; x <= _x + radius - 1; x++)
 		{
-			int i = ConvertXYToIndice(x, y);
+			if (sqrt((x - _x) * (x - _x) + (y - _y) * (y - _y)) <= radius && y < height * cellSize && y > 0 && x > 0 && x < width * cellSize)
+			{
+				int i = ConvertXYToIndice(x, y);
 
-			cells[i].A = 0;
-			cells[i].B = 1;
+				if (mode)
+				{
+					cells[i].A = 0;
+					cells[i].B = 1;
+				}
+				else
+				{
+					cells[i].A = 1;
+					cells[i].B = 0;
+				}
+			}
 		}
 	}
 }

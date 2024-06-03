@@ -60,6 +60,10 @@ void Game::UpdateModel()
 	{
 		debounce = 0;
 		radius--;
+		if (radius <= 0)
+		{
+			radius = 1;
+		}
 	}
 	if (wnd.mouse.LeftIsPressed()) //Left click paints using black, aka Adds
 	{
