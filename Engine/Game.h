@@ -47,11 +47,11 @@ private:
 	/********************************/
 	FrameTimer fTimer;
 
-	const int debounceTime = .20f;
+	const float debounceTime = .20f;
 	float debounce = 0.0f;
 
 	bool pause = false;
 	int radius = 1;
-	const int cellSize = 1;
+	const int cellSize = 2;
 	Grid grid;
 };

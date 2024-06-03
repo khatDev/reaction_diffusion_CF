@@ -61,10 +61,7 @@ void Grid::Update(float dt)
 			const float reaction = A * B * B;
 			oldCells[i].A = A + (diffA * GetLaplaceA(i) - reaction + f * (1 - A)) * dt;
 			oldCells[i].B = B + (diffB * GetLaplaceB(i) + reaction - (k + f) * B) * dt;
-
-			
-		}
-		
+		}	
 	}
 
 	Cell* temp = cells;
@@ -80,23 +77,13 @@ void Grid::Draw(Graphics& gfx) const
 		int sY = (i / width) * cellSize;
 
 		unsigned char val = (cells[i].A - cells[i].B) * 255;
-		val = val > 0 ? val : 0;
-		val = val < 255 ? val : 255;
-		
-		if (val < 0)
-		{
-
-		}
-
 		Color c = {val, val, val };
-		if (cells[i].A > cells[i].B)
-		{
-			c = Colors::White;
-		}
-		else
+
+		if (cells[i].B > cells[i].A) // If B > A Val is negative and if its negative it rolls around to 255
 		{
 			c = Colors::Black;
 		}
+
 
 		for (int y = 0; y < cellSize; y++)
 		{

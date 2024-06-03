@@ -25,7 +25,7 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	grid(gfx.ScreenWidth, gfx.ScreenHeight, cellSize)
+	grid(gfx.ScreenHeight, gfx.ScreenHeight, cellSize)
 {
 }
 
@@ -76,10 +76,6 @@ void Game::UpdateModel()
 
 	if (!pause)
 	{
-		//for (int i = 0; i < 3; i++)
-		//{
-		//	
-		//}
 		grid.Update();
 	}
 

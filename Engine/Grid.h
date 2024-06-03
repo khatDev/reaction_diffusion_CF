@@ -42,8 +42,8 @@ private:
 	//-----Sim Params-----
 	const float diffA = 1.0f;
 	const float diffB = 0.5f;
-	const float f = 0.055f;
-	const float k = 0.062f;
+	const float f = .01669f;
+	const float k = .04981f;
 
 	const float diagW = 0.05f;
 	const float adjW = 0.2f;
