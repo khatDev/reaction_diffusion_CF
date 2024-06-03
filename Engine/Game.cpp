@@ -39,6 +39,7 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	grid.Update();
 }
 
 void Game::ComposeFrame()

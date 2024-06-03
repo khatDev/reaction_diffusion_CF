@@ -44,6 +44,6 @@ private:
 	/********************************/
 	/*  User Variables              */
 	/********************************/
-	int cellSize = 20;
+	int cellSize = 1;
 	Grid grid;
 };
