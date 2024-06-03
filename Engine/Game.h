@@ -24,6 +24,7 @@
 #include "Mouse.h"
 #include "Graphics.h"
 #include "Grid.h"
+#include "FrameTimer.h"
 
 class Game
 {
@@ -44,6 +45,13 @@ private:
 	/********************************/
 	/*  User Variables              */
 	/********************************/
-	int cellSize = 1;
+	FrameTimer fTimer;
+
+	const int debounceTime = .20f;
+	float debounce = 0.0f;
+
+	bool pause = false;
+	int radius = 1;
+	const int cellSize = 1;
 	Grid grid;
 };

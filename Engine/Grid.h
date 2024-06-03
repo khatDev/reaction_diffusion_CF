@@ -16,10 +16,14 @@ public:
 	Grid(const int _w, const int _h, const int _cellSize); //CellSize must be multiple of width AND height!
 	~Grid();
 
+
+	void Reset();
+	void Paint(const int x, const int y, const int radius, const bool mode = true);
 	void Update(float dt = 1.0f);
 	void Draw(Graphics& gfx) const;
 
 private:
+
 	float GetLaplaceA(const int ind);
 	float GetLaplaceB(const int ind);
 
@@ -31,7 +35,7 @@ private:
 
 	//-----Grid Params-----
 	const int numCells;
-	const int cellSize;
+	const int cellSize; 
 	const int width;
 	const int height;
 

@@ -8,30 +8,9 @@ Grid::Grid(const int _w, const int _h, const int _cellSize)
 	numCells((_h / _cellSize) * (_w / _cellSize))
 {	
 	cells = new Cell[numCells];
-	for (int i = 0; i < numCells; i++)
-	{
-		cells[i].A = 1;
-		cells[i].B = 0;
-	}
-
-	int centerSize = 24; //Value is halved so 2 means its a 4x4
-	for (int y = height / 2-centerSize; y < height / 2 + centerSize; y++)
-	{
-		for (int x = width / 2 - centerSize; x < width / 2 + centerSize; x++)
-		{
-			int i = ConvertXYToIndice(x, y);
-
-			cells[i].A = 0;
-			cells[i].B = 1;
-		}
-	}
-
 	oldCells = new Cell[numCells];
-	for (int i = 0; i < numCells; i++)
-	{
-		oldCells[i].A = 1;
-		oldCells[i].B = 0;
-	}
+	Reset();
+	Paint(1,1,1);
 }
 
 Grid::~Grid()
@@ -42,6 +21,21 @@ Grid::~Grid()
 
 	delete[] oldCells;
 	oldCells = nullptr;
+}
+
+void Grid::Paint(const int x, const int y, const int radius, const bool mode)
+{
+	int centerSize = 24; //Value is halved so 2 means its a 4x4
+	for (int y = height / 2 - centerSize; y < height / 2 + centerSize; y++)
+	{
+		for (int x = width / 2 - centerSize; x < width / 2 + centerSize; x++)
+		{
+			int i = ConvertXYToIndice(x, y);
+
+			cells[i].A = 0;
+			cells[i].B = 1;
+		}
+	}
 }
 
 void Grid::Update(float dt)
@@ -89,6 +83,17 @@ void Grid::Draw(Graphics& gfx) const
 				gfx.PutPixel(sX + x, sY + y, c);
 			}
 		}
+	}
+}
+
+void Grid::Reset()
+{
+	for (int i = 0; i < numCells; i++)
+	{
+		cells[i].A = 1;
+		cells[i].B = 0;
+		oldCells[i].A = 1;
+		oldCells[i].B = 0;
 	}
 }
 

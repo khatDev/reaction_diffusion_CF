@@ -39,7 +39,43 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	grid.Update();
+	float dt = fTimer.Mark();
+
+	if (wnd.kbd.KeyIsPressed('R') && debounce >= debounceTime) //Resets the grid
+	{
+		debounce = 0;
+		grid.Reset();
+	}
+	if (wnd.kbd.KeyIsPressed(VK_SPACE) && debounce >= debounceTime) //Resets the grid
+	{
+		debounce = 0;
+		pause = !pause;
+	}
+	if (wnd.kbd.KeyIsPressed('1') && debounce >= debounceTime) //Increases brush size
+	{
+		debounce = 0;
+		radius++;
+	}	
+	if (wnd.kbd.KeyIsPressed('2') && debounce >= debounceTime) //Decreases brush size
+	{
+		debounce = 0;
+		radius--;
+	}
+	if (wnd.mouse.LeftIsPressed()) //Left click paints using black, aka Adds
+	{
+		grid.Paint(wnd.mouse.GetPosX(), wnd.mouse.GetPosY(), radius);
+	}
+	if (wnd.mouse.RightIsPressed()) //Right click paints using white, aka Subtracts
+	{
+		grid.Paint(wnd.mouse.GetPosX(), wnd.mouse.GetPosY(), radius, false);
+	}
+
+	if (!pause)
+	{
+		grid.Update();
+	}
+
+	debounce += dt;
 }
 
 void Game::ComposeFrame()
